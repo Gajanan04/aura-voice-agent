@@ -9,7 +9,7 @@
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node dist/tools/orderLookup.test.js && node dist/tools/productCatalog.test.js && node dist/agent/agentService.test.js && node dist/routes/chat.test.js && node dist/routes/live.test.js && node dist/routes/orders.test.js && node dist/routes/catalog.test.js",
+    "test": "npm run build && node dist/tools/orderLookup.test.js && node dist/tools/productCatalog.test.js && node dist/agent/agentService.test.js && node dist/routes/chat.test.js && node dist/routes/live.test.js && node dist/routes/orders.test.js && node dist/routes/catalog.test.js && node dist/routes/app.test.js",
     "start": "node dist/index.js"
   },
   "dependencies": {

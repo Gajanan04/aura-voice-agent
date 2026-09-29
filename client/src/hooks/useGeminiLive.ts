@@ -109,7 +109,7 @@ export function useGeminiLive(callbacks: GeminiLiveCallbacks): GeminiLiveControl
     let processor: ScriptProcessorNode | null = null
     try {
       source = context.createMediaStreamSource(stream)
-      processor = context.createScriptProcessor(4096, 1, 1)
+      processor = context.createScriptProcessor(2048, 1, 1)
       processor.onaudioprocess = (event) => {
         const input = event.inputBuffer.getChannelData(0)
         const output = event.outputBuffer.getChannelData(0)
@@ -171,11 +171,11 @@ export function useGeminiLive(callbacks: GeminiLiveCallbacks): GeminiLiveControl
       const args = call.args ?? {}
       const orderId = typeof args.order_id === 'string' ? args.order_id : ''
       let result: ChatToolCall['result']
-      if (call.name === 'get_order_details' && Object.keys(args).length === 1 && orderId) {
+      if (call.name === 'get_order_details') {
         try { result = await lookupOrder(orderId) } catch {
           result = { ok: false, error: { code: 'LOOKUP_UNAVAILABLE', message: 'The order lookup could not be completed. Please try again.' } }
         }
-      } else if (call.name === 'get_product_catalog' && Object.keys(args).length === 0) {
+      } else if (call.name === 'get_product_catalog') {
         try { result = await lookupProductCatalog() } catch {
           result = { ok: false, error: { code: 'CATALOG_UNAVAILABLE', message: 'The product catalog could not be returned. Please try again.' } }
         }
@@ -184,9 +184,7 @@ export function useGeminiLive(callbacks: GeminiLiveCallbacks): GeminiLiveControl
           ok: false,
           error: {
             code: 'INVALID_TOOL_ARGUMENTS',
-            message: call.name === 'get_product_catalog'
-              ? 'The product catalog could not be returned because the tool request was invalid.'
-              : 'The order lookup could not be completed because the tool request was invalid.',
+            message: 'The requested tool is not available.',
           },
         }
       }
