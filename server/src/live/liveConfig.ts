@@ -9,6 +9,12 @@ export const geminiLiveConfig = {
   responseModalities: [Modality.AUDIO],
   inputAudioTranscription: {},
   outputAudioTranscription: {},
+  realtimeInputConfig: {
+    automaticActivityDetection: {
+      disabled: false,
+      silenceDurationMs: 500,
+    },
+  },
   speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } } },
   systemInstruction: {
     parts: [{ text: `${ariaInstructions}\n\nApproved Aura Skincare brand and policy information (the only approved non-order facts):\n${JSON.stringify(brandPolicyInfo)}` }],
