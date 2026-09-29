@@ -15,6 +15,9 @@ export const geminiLiveConfig = {
       silenceDurationMs: 500,
     },
   },
+  contextWindowCompression: {
+    slidingWindow: {},
+  },
   speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } } },
   systemInstruction: {
     parts: [{ text: `${ariaInstructions}\n\nApproved Aura Skincare brand and policy information (the only approved non-order facts):\n${JSON.stringify(brandPolicyInfo)}` }],
