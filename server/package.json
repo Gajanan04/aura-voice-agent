@@ -1,0 +1,26 @@
+{
+  "name": "@aura-voice-agent/server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "prebuild": "npm run clean",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node dist/tools/orderLookup.test.js && node dist/tools/productCatalog.test.js && node dist/agent/agentService.test.js && node dist/routes/chat.test.js && node dist/routes/live.test.js && node dist/routes/orders.test.js && node dist/routes/catalog.test.js",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "dotenv": "^18.0.4",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "~5.7.2"
+  }
+}
